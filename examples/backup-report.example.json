@@ -1,0 +1,14 @@
+{
+  "execution_timestamp": "2026-11-05T12:00:00Z",
+  "execution_mode": "offline",
+  "regions_evaluated": ["us-east-1", "us-west-2"],
+  "eligible_instances": [],
+  "eligible_volumes": [],
+  "snapshots_proposed": [
+    {"region": "us-east-1", "volume_id": "vol-example", "instance_id": "i-example", "volume_type": "gp3", "size_gib": 20, "result": "planned"}
+  ],
+  "snapshots_created": [],
+  "snapshots_skipped": [],
+  "errors": [],
+  "mutations_executed": false
+}

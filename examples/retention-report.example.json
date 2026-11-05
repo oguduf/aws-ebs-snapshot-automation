@@ -1,0 +1,12 @@
+{
+  "execution_timestamp": "2026-11-05T12:00:00Z",
+  "execution_mode": "offline",
+  "managed_snapshots_evaluated": 0,
+  "snapshots_within_retention": [],
+  "expired_snapshots": [],
+  "protected_snapshots": [],
+  "deletion_candidates": [],
+  "snapshots_deleted": [],
+  "errors": [],
+  "mutations_executed": false
+}
