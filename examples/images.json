@@ -1,0 +1,6 @@
+{
+  "us-east-1": {
+    "Images": [{"ImageId": "ami-0a111111111111111", "BlockDeviceMappings": [{"DeviceName": "/dev/xvda", "Ebs": {"SnapshotId": "snap-0a222222222222222"}}]}]
+  },
+  "us-west-2": {"Images": []}
+}

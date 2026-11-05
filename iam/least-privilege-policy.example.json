@@ -1,0 +1,64 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ReadOnlyDiscovery",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeInstances",
+        "ec2:DescribeVolumes",
+        "ec2:DescribeSnapshots",
+        "ec2:DescribeImages"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "InspectRecycleBinSnapshotRules",
+      "Effect": "Allow",
+      "Action": "rbin:ListRules",
+      "Resource": "*"
+    },
+    {
+      "Sid": "CreateTaggedSnapshotsForApprovedVolumes",
+      "Effect": "Allow",
+      "Action": "ec2:CreateSnapshot",
+      "Resource": [
+        "arn:aws:ec2:*:111122223333:volume/*",
+        "arn:aws:ec2:*:111122223333:snapshot/*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestTag/ManagedBy": "aws-ebs-snapshot-automation"
+        }
+      }
+    },
+    {
+      "Sid": "TagOnlySnapshotsCreatedBySnapshotAutomation",
+      "Effect": "Allow",
+      "Action": "ec2:CreateTags",
+      "Resource": "arn:aws:ec2:*:111122223333:snapshot/*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:CreateAction": "CreateSnapshot",
+          "aws:RequestTag/ManagedBy": "aws-ebs-snapshot-automation"
+        }
+      }
+    },
+    {
+      "Sid": "DeleteOnlyAutomationManagedUnprotectedSnapshots",
+      "Effect": "Allow",
+      "Action": "ec2:DeleteSnapshot",
+      "Resource": "arn:aws:ec2:*:111122223333:snapshot/*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:ResourceTag/ManagedBy": "aws-ebs-snapshot-automation"
+        },
+        "StringNotEquals": {
+          "ec2:ResourceTag/BackupProtected": "true",
+          "ec2:ResourceTag/ComplianceHold": "true",
+          "ec2:ResourceTag/LegalHold": "true"
+        }
+      }
+    }
+  ]
+}

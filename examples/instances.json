@@ -1,0 +1,53 @@
+{
+  "us-east-1": {
+    "Reservations": [{
+      "Instances": [
+        {
+          "InstanceId": "i-0a111111111111111",
+          "State": {"Name": "running"},
+          "Placement": {"AvailabilityZone": "us-east-1a"},
+          "Tags": [{"Key": "Name", "Value": "demo-api-dev"}, {"Key": "Backup", "Value": "true"}, {"Key": "Environment", "Value": "dev"}],
+          "BlockDeviceMappings": [{"DeviceName": "/dev/xvda", "Ebs": {"VolumeId": "vol-0a111111111111111"}}, {"DeviceName": "/dev/xvdb", "Ebs": {"VolumeId": "vol-0a222222222222222"}}, {"DeviceName": "/dev/sdb", "VirtualName": "ephemeral0"}]
+        },
+        {
+          "InstanceId": "i-0a222222222222222",
+          "State": {"Name": "stopped"},
+          "Placement": {"AvailabilityZone": "us-east-1b"},
+          "Tags": [{"Key": "Backup", "Value": "true"}],
+          "BlockDeviceMappings": [{"DeviceName": "/dev/xvda", "Ebs": {"VolumeId": "vol-0a333333333333333"}}]
+        },
+        {
+          "InstanceId": "i-0a333333333333333",
+          "State": {"Name": "running"},
+          "Placement": {"AvailabilityZone": "us-east-1c"},
+          "Tags": [{"Key": "Name", "Value": "unprotected"}],
+          "BlockDeviceMappings": [{"DeviceName": "/dev/xvda", "Ebs": {"VolumeId": "vol-0a444444444444444"}}]
+        },
+        {
+          "InstanceId": "i-0a444444444444444",
+          "State": {"Name": "running"},
+          "Placement": {"AvailabilityZone": "us-east-1a"},
+          "Tags": [{"Key": "Name", "Value": "duplicate-mapping-test"}, {"Key": "Backup", "Value": "true"}, {"Key": "Environment", "Value": "dev"}],
+          "BlockDeviceMappings": [{"DeviceName": "/dev/xvdc", "Ebs": {"VolumeId": "vol-0a111111111111111"}}]
+        }
+      ]
+    }]
+  },
+  "us-west-2": {
+    "Reservations": [{
+      "Instances": [{
+        "InstanceId": "i-0b111111111111111",
+        "State": {"Name": "running"},
+        "Placement": {"AvailabilityZone": "us-west-2a"},
+        "Tags": [{"Key": "Name", "Value": "demo-worker-stage"}, {"Key": "Backup", "Value": "true"}, {"Key": "Environment", "Value": "stage"}],
+        "BlockDeviceMappings": [{"DeviceName": "/dev/xvda", "Ebs": {"VolumeId": "vol-0b111111111111111"}}]
+      }, {
+        "InstanceId": "i-0b222222222222222",
+        "State": {"Name": "running"},
+        "Placement": {"AvailabilityZone": "us-west-2b"},
+        "Tags": [{"Key": "Name", "Value": "no-ebs-stage"}, {"Key": "Backup", "Value": "true"}, {"Key": "Environment", "Value": "stage"}],
+        "BlockDeviceMappings": [{"DeviceName": "/dev/sdb", "VirtualName": "ephemeral0"}]
+      }]
+    }]
+  }
+}

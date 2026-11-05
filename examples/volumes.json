@@ -1,0 +1,12 @@
+{
+  "us-east-1": {
+    "Volumes": [
+      {"VolumeId": "vol-0a111111111111111", "Size": 20, "VolumeType": "gp3", "Encrypted": true, "State": "in-use", "AvailabilityZone": "us-east-1a", "Attachments": [{"InstanceId": "i-0a111111111111111", "State": "attached"}], "Tags": [{"Key": "Environment", "Value": "dev"}]},
+      {"VolumeId": "vol-0a222222222222222", "Size": 100, "VolumeType": "gp3", "Encrypted": true, "State": "in-use", "AvailabilityZone": "us-east-1a", "Attachments": [{"InstanceId": "i-0a111111111111111", "State": "attached"}], "Tags": [{"Key": "Environment", "Value": "dev"}]},
+      {"VolumeId": "vol-0a333333333333333", "Size": 8, "VolumeType": "gp2", "Encrypted": false, "State": "in-use", "AvailabilityZone": "us-east-1b", "Attachments": [{"InstanceId": "i-0a222222222222222", "State": "attached"}], "Tags": []}
+    ]
+  },
+  "us-west-2": {
+    "Volumes": [{"VolumeId": "vol-0b111111111111111", "Size": 50, "VolumeType": "gp3", "Encrypted": true, "State": "in-use", "AvailabilityZone": "us-west-2a", "Attachments": [{"InstanceId": "i-0b111111111111111", "State": "attached"}], "Tags": [{"Key": "Environment", "Value": "stage"}]}]
+  }
+}

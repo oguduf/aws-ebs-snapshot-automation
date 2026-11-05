@@ -1,0 +1,35 @@
+name: Bash validation CI
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Install offline validation tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes bats jq shellcheck shfmt
+      - name: Bash syntax
+        run: bash -n bin/ebs-backup.sh lib/*.sh tests/helpers/mock_aws.sh
+      - name: ShellCheck
+        run: shellcheck -x bin/ebs-backup.sh lib/*.sh tests/helpers/mock_aws.sh
+      - name: shfmt
+        run: shfmt -d -i 2 -ci bin/*.sh lib/*.sh tests/helpers/mock_aws.sh
+      - name: Bats
+        run: bats tests
+      - name: Offline integration
+        run: bash ./bin/ebs-backup.sh --mode offline --action all --fixtures examples --reference-time 2026-11-05T12:00:00Z --output reports/ci-summary.json
+      - name: Validate JSON reports
+        run: |
+          jq -e '.backup.execution_mode == "offline" and .backup.mutations_executed == false' reports/ci-summary.json
+          jq -e '.retention.deletion_candidates | type == "array"' reports/ci-summary.json
+          jq -e '.mutations_executed == false' reports/backup-summary.json
+          jq -e '.mutations_executed == false' reports/retention-summary.json
